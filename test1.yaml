@@ -1,0 +1,37 @@
+---
+- name: "file creation"
+  hosts: all
+  tasks:
+#  - name: "file creation"
+#     file:
+#      path: /var/tmp/testfile
+#      owner: ansible
+#      group: ansible
+#      mode: 0644
+#      state: touch
+   - name: "directory creation"
+     file:
+      path: /var/tmp/test
+      owner: ansible
+      group: ansible
+      mode: 0644
+      state: directory
+   - name: "create file with content"
+     copy:
+      content: |
+        Hi, this is ansible test
+        hi
+      dest: /var/tmp/testfile
+      mode: 0644
+   - name: "copy file from src control node to dest managing node"
+     copy:
+      src: f1 
+      dest: /var/tmp/test
+      mode: 0644
+   - name: "copy managing node source config file to dest in managing node"
+     copy:
+      src: /etc/resolv.conf 
+      dest: /var/tmp/testfile
+      mode: 0644
+...
+
